@@ -56,8 +56,21 @@ async function sendRequest(url, method, data) {
     }
 }
 
+
+// let searchForm = document.querySelector('#searchForm')
+
+// searchForm.addEventListener('submit', (e) => {
+//     e.preventDefault()
+//     search()
+// })
+
+
+
 let searchBtn = document.querySelector('.searchLine button')
-searchBtn.addEventListener('click', search)
+if(searchBtn) {
+
+    searchBtn.addEventListener('click', search)
+}
 
 
 async function search() {
@@ -103,7 +116,7 @@ function showFilm(obj) {
     let movieFullData = document.querySelector('.movieFullData')
     movieFullData.innerHTML = ""
 
-    let arr = ['Genre', 'imdbRating', 'Year', 'Released', 'Type', 'Runtime', 'Writer', 'Language', 'Country', 'Actors', "Plot"]
+    let arr = ['Title', 'Genre', 'imdbRating', 'Year', 'Released', 'Type', 'Runtime', 'Actors', 'Language', 'Country', 'Writer', "Plot"]
 
     for(let elem of arr) {
         if(obj[elem]) {
@@ -165,32 +178,52 @@ function addFav() {
     let poster = elem.getAttribute('data-poster')
     let imdbID = elem.getAttribute('data-imdbID')
 
-    let obj = {title, poster, imdbID}
+    let obj = {
+        "Title": title,
+        "Poster": poster,
+        imdbID
+    }
 
-    console.log(obj)
-    addFavToLS(obj)
-    elem.classList.add('active')
-
-    // console.log(elem)
-    // console.log(title)
-    // console.log(poster)
-    // console.log(imdbID)    
-} 
-
-
- function addFavToLS(movie) {
     let favs = localStorage.getItem('favs')
     
     if(!favs) {
         favs = []
-        //  addFavToLS = []
     } else {
         favs = JSON.parse(favs)
-        // addFavToLS = []
+        
+    }
+    
+    let existingIndex = favs.findIndex(movie => movie.imdbID === obj.imdbID)
+    
+    if (existingIndex  == -1) {
+        favs.push(obj)
+        elem.classList.add('active')
+    } else {
+        favs.splice(existingIndex, 1)
+        elem.classList.remove('active')
     }
 
-    favs.push(movie)
     localStorage.setItem('favs', JSON.stringify(favs))
+    if (UPDATE_FAVORITES) {
+        showFavorites()
+    }
+   
+    //  elem.classList.add('active')
+
+     
+} 
+
+function showFavorites() {
+    let favorites = localStorage.getItem('favs')
+    favorites = JSON.parse(favorites)
+
+    showSimilarFilms(favorites)
+    console.log (favorites)  
 }
 
+showFavorites()
 
+
+
+
+ 

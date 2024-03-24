@@ -51,22 +51,22 @@
 @keyframes bgMove {
     0%{
         background-position: left top;
-        background-size: 250%; 
+        background-size: 135%; 
     }
 
     35% {
         background-position: bottom;
-        background-size: 380%; 
+        background-size: 135%; 
     }
 
     70% {
         background-position: right top;
-        background-size: 240%;
+        background-size: 135%;
     }
 
     100%{
         background-position: left top;
-        background-size: 250%; 
+        background-size: 135%; 
     }
 }
 
@@ -86,7 +86,11 @@ body {
 
     transition: 300ms;
 
-    animation: bgMove 300s linear infinite alternate;
+    animation: bgMove 150s linear infinite alternate;
+}
+a {
+    text-decoration: none;
+    color: var(--dark-elem-color);
 }
 
 header, .searchLine, section {
@@ -332,18 +336,23 @@ body[data-theme="white"] .themeChange img{
 body[data-theme="dark"] .favorite img {
     filter: invert(100%);
 }
-
 body[data-theme="dark"] .searchLine button {
     color: white;
+}
+body[data-theme="dark"] .input {
+    color: var(--bg-main);
+}
+body[data-theme="dark"] a {
+    color: var(--bg-main);
 }
 
 @media (max-width: 500px) {
     .similar {
-        grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     }
 
     header h1 {
-        font-size: 20px;
+    font-size: 20px;
     }
 }
 
@@ -354,8 +363,9 @@ body[data-theme="dark"] .searchLine button {
     border-radius: 5px;
     height: 10px;
     background: 
-        linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(8,0,0,1) 50%, rgba(0,0,0,1) 58%, rgba(255,255,255,1) 58%, rgba(255,255,255,1) 100%)
-        #f2f2f2;
+    linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%,
+    rgba(8,0,0,1) 50%, rgba(0,0,0,1) 58%, rgba(255,255,255,1) 58%, rgba(255,255,255,1) 100%)
+    #f2f2f2;
     background-size:300% 100%;
     animation: l1 2s infinite linear;
 }
